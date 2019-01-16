@@ -32,4 +32,4 @@ Then again open, "nodemailer.js" and enter the SENDGRID_USER, SENDGRID_PASSWORD,
 
 ## License
 
-Jolie is licensed under MIT License.
+Jolie is licensed under <a href="https://opensource.org/licenses/MIT">MIT License</a>.
