@@ -1,0 +1,230 @@
+{% extends "layout/layout.nunjucks" %}
+
+{% block body %}
+<!-- Animated -->
+
+<div class="animated fadeIn">
+  <div class="page-wrap">
+    <div class="row nomargin">
+      <div class="col-lg-10 col-lg-offset-1">
+	    <h1>Users List</h1>   
+		
+		<div class="panel panel-primary">
+				<div class="panel-heading clickable">
+					<h3 class="panel-title">Information</h3>
+					<span class="pull-right "><i class="glyphicon glyphicon-chevron-up"></i></span>
+				</div>
+				<div class="panel-body">
+			<p class="sub-header"> <b>Add User</b> - Create the new user </p>
+		<p class="sub-header"> <b>Edit</b> - Edit the user Details </p>
+		<p class="sub-header"> <b>Delete</b> - Delete the user permently </p>
+		</div>
+			</div>
+			
+	
+		
+	<button id="myBtn" class="btn btn-default myBtn" onclick="openmodel('myModal')">Add User</button>
+      </div>
+    </div>
+  </div>
+  <div class="pageContent">
+   
+	
+      <div class="row nomargin">
+        <div class="col-lg-10 col-lg-offset-1">
+		  <div id="infomessage"></div>
+		  <table class="table table-striped  dataTable" id="user_table">
+		    <thead>
+		      <tr>
+			<th scope="col" style="width: 10px">#</th>
+			<th scope="col">First Name</th>
+			<th scope="col">Last Name</th>
+			<th scope="col">Email</th>
+			<th scope="col">Business Name</th>
+			<th scope="col">Action</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    </tbody>
+		  </table>
+		  
+		  
+		  
+			
+		<div id="myModal" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content"> <span class="close" onclick="closemodal('myModal')">&times;</span>
+		    <h4 class="modal-title">Create Admin User</h4>
+		    <div class="modal-body">
+		      <form action="adduser" method="post" class="logForm form-animate-fields" id="userform" onsubmit="return frmusersubmit()">
+			<div class="errorlabel" id="popuperror">{{errormsg}}</div>
+			<div class="row nomargin">
+			
+			  <div class="form-group form-field">
+			    <input type="text" class="form-control" name="firstName"  value="{{req.param('firstName')}}" id="firstName" required/>
+			    <label for="firstName" class="form-label"> <span class="form-label-content">First Name</span> </label>
+			  </div>
+			  <div class="form-group form-field">
+			    <input type="text" class="form-control" name="lastName" value="{{req.param('lastName')}}" id="LastName" required />
+			    <label for="LastName" class="form-label"> <span class="form-label-content">Last Name</span> </label>
+			  </div>
+			</div>
+			<div class="form-group form-field">
+			  <input type="text" class="form-control" name="businessName" id="businessName" value="{{req.param('businessName')}}" required />
+			  <label for="businessName" class="form-label"> <span class="form-label-content">Business Name</span> </label>
+			</div>
+			<div class="form-group form-field">
+			  <input type="email" class="form-control" name="email" id="emailAddress" value="{{req.param('email')}}"  required/>
+			  <label for="emailAddress" class="form-label"> <span class="form-label-content">Email Address</span> </label>
+			</div>
+			
+			<div class="row nomargin">
+			
+			  <div class="form-group form-field">
+			    <input type="password" class="form-control" name="password"  value="{{req.param('firstName')}}" id="password" required />
+			    <label for="password" class="form-label"> <span class="form-label-content">Password</span> </label>
+			  </div>
+			  <div class="form-group form-field">
+			    <input type="password" class="form-control" name="cnfpaswword" value="{{req.param('lastName')}}" id="confirm_password" required />
+			    <label for="Confrim Password" class="form-label"> <span class="form-label-content">Confrim Password</span> </label>
+			  </div>
+			</div>
+			
+			 <div class="form-group form-field">
+				<label for="accountType">Select type:</label>
+				<select class="form-control form-field" id="accountType" name="accountType" style="border-bottom:1px solid #c9d3e0;" required>
+				  <option value="true">Admin</option>
+				  <option value="false">User</option>
+				</select>
+			  </div>
+			<div class="checkbox">
+			  <input type="checkbox" id="agreeStatement" required />
+			  <label for="agreeStatement"><span>By checking this box, you confirm you have received written authorization from this user to collect, use, and share the user's personal identifying information with Dwolla, Inc. You must be able to provide a copy of this authorization to Dwolla, Inc. at any time upon request.</span></label>
+			</div>
+				<input type="submit" class="btn btn-default" value="Create" id="usercreate"  >
+		      </form>
+		    </div>
+		  </div>
+		</div>
+		
+		
+		
+		<div id="edituser" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content"> <span class="close" onclick="closemodal('edituser')">&times;</span>
+		    <h4 class="modal-title">Edit User Details</h4>
+		    <div class="modal-body">
+		      <form action="updateuser" method="post" class="logForm form-animate-fields" id="edituserform" name="edituserform" onsubmit="return frmeditsubmit()">
+			<div class="errorlabel" id="popuperror">{{errormsg}}</div>
+			<div class="row nomargin">
+			
+			  <div class="form-group form-field">
+			    <input type="text" class="form-control" name="firstName"  value="{{req.param('firstName')}}" id="userfirstName" required/>
+			    <label for="firstName" class="form-label"> <span class="form-label-content">First Name</span> </label>
+			  </div>
+			  <div class="form-group form-field">
+			    <input type="text" class="form-control" name="lastName" value="{{req.param('lastName')}}" id="userLastName" required />
+			    <label for="LastName" class="form-label"> <span class="form-label-content">Last Name</span> </label>
+			  </div>
+			</div>
+			<div class="form-group form-field">
+			  <input type="text" class="form-control" name="businessName" id="userbusinessName" value="{{req.param('businessName')}}" required />
+			  <label for="businessName" class="form-label"> <span class="form-label-content">Business Name</span> </label>
+			</div>
+			<div class="form-group form-field">
+			  <input type="email" class="form-control" name="email" id="useremailAddress" value="{{req.param('email')}}"  required readonly/>
+			  <input type="hidden" class="form-control" name="userid" id="userid" value="{{req.param('email')}}"  />
+			  <label for="emailAddress" class="form-label"> <span class="form-label-content">Email Address</span> </label>
+			</div>
+			
+			<div class="row nomargin">
+			
+			  <div class="form-group form-field">
+			    <input type="password" class="form-control" name="password"  value="{{req.param('firstName')}}" id="password"  />
+			    <label for="password" class="form-label"> <span class="form-label-content">Password</span> </label>
+			  </div>
+			  <div class="form-group form-field">
+			    <input type="password" class="form-control" name="cnfpaswword" value="{{req.param('lastName')}}" id="userconfirm_password"  />
+			    <label for="Confrim Password" class="form-label"> <span class="form-label-content">Confrim Password</span> </label>
+			  </div>
+			</div>
+			
+			 <div class="form-group form-field">
+				<label for="accountType">Select type:</label>
+				<select class="form-control form-field" id="useraccountType" name="accountType" style="border-bottom:1px solid #c9d3e0;" required>
+				  <option value="true">Admin</option>
+				  <option value="false">User</option>
+				</select>
+			  </div>
+					<input type="submit" class="btn btn-default" value="Create" id="usercreate"  >
+		      </form>
+		    </div>
+		  </div>
+		</div>
+		
+		
+		
+		<div id="iavModal" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content"> <span class="close" onclick="closemodal('iavModal')">&times;</span>
+		    <h4 class="modal-title">Create Funding Source </h4>
+		    <div class="modal-body">
+		     	
+				<div id="iavContainer"></div>
+		    </div>
+		  </div>
+		</div>
+		
+		
+		
+		<div id="sendmoney" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content"> <span class="close" onclick="closemodal('iavModal')">&times;</span>
+		    <h4 class="modal-title">Create Funding Source </h4>
+		    <div class="modal-body">
+		     <form action="sendmoney" method="post" class="logForm form-animate-fields" id="sendform">
+			<div class="errorlabel" id="popuperror">{{errormsg}}</div>
+			<div class="row nomargin">
+			  <div class="form-group form-field">
+			    <input type="text" class="form-control" name="amount"  value="" id="amount" />
+			    <label for="amount" class="form-label"> <span class="form-label-content">Amount</span> </label>
+			  </div>
+			  <div class="form-group form-field">
+			    <input type="hidden" class="form-control" name="customer_id" value="" id="customer_id" />
+			  </div>
+			</div>
+				<input type="button" class="btn btn-default" value="Create" onclick="frmsendsubmit()">
+		      </form>
+		    </div>
+		  </div>
+		</div>
+
+		  
+		  
+        </div>
+      </div>
+	  
+    
+  </div>
+</div>
+<div id="modetype" style="display:none">{{req.session.type}}</div>
+<!-- .animated -->
+
+<script>
+
+var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
+
+{% endblock %}

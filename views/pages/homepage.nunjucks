@@ -1,0 +1,272 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<title>Jolie</title>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+<link href="/styles/font-awesome.css" rel="stylesheet" type="text/css" />
+<!-- General Font CSS -->
+<link href="/styles/fonts.css" rel="stylesheet" type="text/css" />
+<!-- Bootstrap Css -->
+<link href="/styles/bootstrap.css" rel="stylesheet" type="text/css" />
+<!-- Common & Responsive CSS -->
+<link href="/styles/common.css" rel="stylesheet" type="text/css" />
+<link href="/styles/responsive.css" rel="stylesheet" type="text/css" />
+<link href="/styles/custom.css" rel="stylesheet" type="text/css" />
+
+</head >
+
+<body>
+
+	<div class="bodyBg"></div>
+		<!-- Header Section -->
+		<header>
+			<div class="container">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 logoSec">
+					<a href="" class="navbar-brand"><img src="/images/jolie-logo-white-all.svg" class="img-svg" /></a>
+				</div>
+			</div>
+		</header>
+		<!-- End of Header Section-->
+		
+		
+		<!-- Body Section -->
+    <section id="content" class="homepageContent homeInner">
+        <!--Content section -->
+			<div class="container">
+				<div class="blueBg">
+					<div class="row nomargin">
+						<div class="col-xs-12 col-sm-6 col-md-7 col-lg-7 lftContent">
+							<div class="inner-content">
+								<h1>Jolie v.0.0.1</h1>
+								<p class="col-xs-12 col-sm-12 col-md-9 col-lg-9 nopadding">Helpful links:</p>
+								<div class="clearfix"></div>
+								<ul>
+									<li><a href="">Dwolla Sandbox Credentials</a></li>
+									<li><a href="">Dwolla Production Credentials</a></li>
+									<li><a href="">Repo ReadMe</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5 FormMainDiv">
+							<div class="whiteBox" id="loginsignup" >
+								<ul class="tabs">
+								  <li class="active" rel="loginTab">Login</li>
+								  <li rel="signupTab" id="signupTab1">Sign Up</li>
+								  
+								</ul>
+								<div class="tab_container">
+									<!-- loginTab -->
+									
+									<h3 class="d_active tab_drawer_heading" rel="loginTab">Login</h3>
+									<div id="loginTab" class="tab_content">
+										<div class="loginForm ">
+												<div class="errorlabel">{{errormsg}}</div>
+											<form action="/login" class="logForm form-animate-fields" id="loginform" method="post">
+												<div class="form-group form-field">
+													<input type="email" class="form-control" name="email" value="{{req.param('email')}}" id="userlogin"  required/>
+													
+													<label for="userlogin" class="form-label">
+													  <span class="form-label-content">Email Address</span>
+													</label>
+												</div>
+												<div class="form-group form-field">
+													<input type="password" class="form-control" name="password" value="" id="userLPassword" required />
+													<label for="userLPassword" class="form-label">
+													  <span class="form-label-content">Password</span>
+													</label>
+												</div>
+												<div class="btnSec">
+													<a href="javascript:void(0)" class="forGetPass" onclick="divshow('forgot')">Forgot Password?</a>
+													<button class="btn btn-default">Login</button>
+												</div>
+											</form>
+										</div>
+									</div>
+									<!-- End of loginTab -->
+									<!-- signupTab -->
+									<h3 class="tab_drawer_heading" rel="signupTab">Sign Up</h3>
+									<div id="signupTab" class="tab_content">
+											<div class="errorlabel">{{errormsg}}</div>
+										<form action="/signup" method="post" class="logForm form-animate-fields" id="signupform">
+											<div class="row nomargin">
+												<div class="col-xs-12 col-sm-6 col-lg-6 nolftpadding">
+													<div class="form-group form-field">
+														<input type="text" class="form-control" name="firstName"  value="{{reqParam.firstName}}" id="firstName" required />
+														<label for="firstName" class="form-label">
+														  <span class="form-label-content">First Name</span>
+														</label>
+													</div>
+												</div>
+												<div class="col-xs-12 col-sm-6 col-lg-6 nolftpadding">
+													<div class="form-group form-field">
+														<input type="text" class="form-control" name="lastName" value="{{reqParam.lastName}}" id="LastName" required/>
+														<label for="LastName" class="form-label">
+														  <span class="form-label-content">Last Name</span>
+														</label>
+													</div>
+												</div>
+											</div>
+											<div class="form-group form-field">
+												<input type="text" class="form-control" name="businessName" id="businessName" value="{{reqParam.businessName}}" required />
+												<label for="businessName" class="form-label">
+												  <span class="form-label-content">Business Name</span>
+												</label>
+											</div>
+											<div class="form-group form-field">
+												<input type="text" class="form-control" name="title" id="JobTitle" value="{{reqParam.title}}" required/>
+												<label for="JobTitle" class="form-label">
+												  <span class="form-label-content">Job Title</span>
+												</label>
+											</div>
+											<div class="form-group form-field">
+												<input type="email" class="form-control" name="email" id="emailAddress" value="{{reqParam.email}}" required/>
+												<label for="emailAddress" class="form-label">
+												  <span class="form-label-content">Email Address</span>
+												</label>
+											</div>
+											<div class="form-group form-field">
+												<input type="password" class="form-control" name="password" id="userPassword" required/>
+												<label for="userPassword" class="form-label">
+												  <span class="form-label-content">Password</span>
+												</label>
+											</div>
+											<div class="form-group selectBox">
+												<select name="country" class="form-control" required>
+													
+												  {% for country in countries %}
+													<option value="{{country.code}}"  {% if reqParam.country == "{{country.code}}" %} selected {% endif %}>{{country.name}}</option>
+												  {% endfor %}
+												
+													<!--<option value="AF" {% if reqParam.country == "AF" %} selected {% endif %} >Afghanistan</option>
+													<option value="AX" {% if reqParam.country == "AX" %} selected {% endif %}>Aland Islands</option>
+													<option value="AL" {% if reqParam.country == "AL" %} selected {% endif %}>Albania</option>
+													<option value="DZ" {% if reqParam.country == "DZ" %} selected {% endif %}>Algeria</option>
+													<option value="AS" {% if reqParam.country == "AS" %} selected {% endif %}>American Samoa</option>-->
+												</select>
+											</div>
+											<div class="checkbox">
+												<input type="checkbox" id="agreeStatement"  required/> 
+												<label for="agreeStatement"><span>I agree to the <a href="">Terms.</a></span></label>
+											</div>
+											<button class="btn btn-default submitBtn">Create a account</button>
+										</form>
+									</div>
+									<!-- End of signupTab -->
+								</div>
+									
+								
+							</div>
+							
+							<div class="whiteBox" id="forgot" style="display:none" >
+									
+									<div id="forgotTab">
+										<div class="loginForm ">
+										
+										<div class="errorlabel">{{errormsg}}</div>
+										<h3 class="pd40">Forgot Password</h3>
+												
+												
+											<form action="/password/forgot" class="logForm form-animate-fields" id="forgotform" method="post">
+												<div class="form-group form-field">
+													<input type="email" class="form-control" name="email" value="{{req.param('email')}}" id="userlogin"  required/>
+													
+													<label for="userlogin" class="form-label">
+													  <span class="form-label-content">Email Address</span>
+													</label>
+												</div>
+												
+												<div class="btnSec">
+													<a href="javascript:void(0)" class="forGetPass" onclick="divshow('loginsignup')">Login / Signup </a>
+													<button class="btn btn-default">Submit</button>
+												</div>
+											</form>
+										</div>
+									</div>
+									</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- End Content section -->
+    </section>
+    <!-- End of Body Section -->
+
+
+	
+
+
+<script src="/js/jquery.js" type="text/javascript"></script>
+<!-- Bootstrap Js Section-->
+<script src="/js/bootstrap.js" type="text/javascript"></script>
+<script  src="/js/common.js"></script>
+<script>
+/* Form Animation */
+	$(function() {
+	  var formAnimatedInput = $('.form-animate-fields .form-control');
+	  
+	  formAnimatedInput.each(function() {
+		var $this = $(this);
+
+		$this.on('focus', function() {
+		  $this.addClass('is-filled');
+		});
+		
+		$this.on('blur', function() {
+		  if($this.val().length == 0) {
+			$this.removeClass('is-filled');
+		  }
+		});
+	  });
+	});
+	
+{% if (tab=='signup') %}
+setTimeout(function(){
+	  $(".tab_content").hide();
+      var activeTab = $("#signupTab1").attr("rel"); 
+	  $("#"+activeTab).fadeIn();		
+	
+      $("ul.tabs li").removeClass("active");
+      $("#signupTab1").addClass("active");
+
+	  $(".tab_drawer_heading").removeClass("d_active");
+	  $(".tab_drawer_heading[rel^='"+activeTab+"']").addClass("d_active");
+	  
+	}, 100);  
+{% endif %}	
+
+
+
+function divshow(id){
+	if (id == "forgot"){
+		$("#forgot").show();
+		$("#loginsignup").hide();
+		
+	} else {
+	
+		$("#forgot").hide();
+		$("#loginsignup").show();
+	}
+	return false;
+}
+
+
+{% if (tab=='forgot') %}
+	 divshow('forgot')
+
+{% endif %}	
+
+</script>
+
+
+
+{% block body %}
+{% endblock %}
+
+
+<footer>
+		
+</footer> 
+
+</body>
+</html>

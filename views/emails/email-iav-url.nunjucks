@@ -1,0 +1,12 @@
+{% extends "layout/layout-email.nunjucks" %}
+
+{% block body %}
+<p style="margin-bottom: 25px;">Dear {{fullName}},</p>
+<p style="margin-bottom: 25px;">You can add you bank account by simply click the button below. </p>
+<div style="margin-bottom: 25px; text-align: center;">
+  <a style="background-color: #00ACC4; display: inline-block; font-size: 1.1em; color: #fff; padding: 10px 35px 10px; font-weight: 500; text-decoration: none; border-radius: 7px;" href="{{baseUrl}}/bank/new?token={{token}}">Add Bank Account</a>
+</div>
+<p style="margin-bottom: 25px;">If you have any trouble, try pasting this link in your browser: <a style="color: #00ACC4; word-wrap: break-word;" href="{{baseUrl}}/bank/new?token={{token}}">{{baseUrl}}/bank/new?token={{token}}</a></p>
+<p style="margin-bottom: 5px;">Sincerely,</p>
+<p style="margin-top: 0px;">The {{appName}} Team</p>
+{% endblock %}

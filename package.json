@@ -1,0 +1,52 @@
+{
+  "name": "Jolie",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A application for the testing the Dwolla platform",
+  "keywords": [],
+  "dependencies": {
+    "@sailshq/connect-redis": "^3.2.1",
+    "@sailshq/lodash": "^3.10.3",
+    "@sailshq/socket.io-redis": "^5.2.0",
+    "consolidate": "^0.15.1",
+    "country-list": "^2.1.0",
+    "cron": "^1.6.0",
+    "csv": "^5.0.0",
+    "csvjson": "^5.1.0",
+    "datatables": "^1.10.18",
+    "dwolla-v2": "^2.0.0",
+    "grunt": "1.0.1",
+    "json2csv": "^4.3.2",
+    "moment": "^2.22.2",
+    "nodemailer": "^4.7.0",
+    "nunjucks": "^3.1.4",
+    "sails": "^1.1.0",
+    "sails-hook-cron": "^3.0.0",
+    "sails-hook-grunt": "^3.1.0",
+    "sails-hook-organics": "^0.15.0",
+    "sails-hook-orm": "^2.1.1",
+    "sails-hook-sockets": "^1.5.5",
+    "sails-postgresql": "^1.0.1",
+	"sendmail": "^1.4.1"
+  },
+  "devDependencies": {
+    "@sailshq/eslint": "^4.19.3"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "npm run lint && npm run custom-tests && echo 'Done.'",
+    "lint": "eslint . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
+    "custom-tests": "echo \"(No other custom tests yet.)\" && echo",
+    "postinstall": "grunt build"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/root/dwollaadmin.git"
+  },
+  "author": "root",
+  "license": "",
+  "engines": {
+    "node": "^8.12"
+  }
+}

@@ -1,0 +1,158 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+<link href="/styles/font-awesome.css" rel="stylesheet" type="text/css" />
+<!-- General Font CSS -->
+<link href="/styles/fonts.css" rel="stylesheet" type="text/css" />
+<!-- Bootstrap Css -->
+<link href="/styles/bootstrap.css" rel="stylesheet" type="text/css" />
+<!-- Common & Responsive CSS -->
+<link href="/styles/common.css" rel="stylesheet" type="text/css" />
+<link href="/styles/responsive.css" rel="stylesheet" type="text/css" />
+<link href="/styles/custom.css" rel="stylesheet" type="text/css" />
+ <link href="https://cdn.jsdelivr.net/sweetalert2/4.2.4/sweetalert2.min.css" rel="stylesheet"/>
+ 
+</head >
+
+<body>
+
+	<div class="bodyBg"></div>
+		<!-- Header Section -->
+		<header>
+		
+			<div class="container">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 logoSec">
+					<a href="/" class="navbar-brand"><img src="/images/dwolla-logo-white-all.svg" class="img-svg" /> <!--<img src="images/Sandbox-logo.svg" class="img-svg sandBoxImg" />--></a>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 BtnSec">
+					   
+				</div>
+			</div>
+		</header>
+		
+			
+		
+		<!-- End of Header Section-->
+		
+		
+		<!-- Body Section -->
+    <section id="content" class="homepageContent homeInner">
+        <!--Content section -->
+			<div class="container">
+				<div class="row nomargin">
+				<div class="whiteBox" style="position:initial;" >
+				<div class="se-pre-con"></div>
+				<div id="iavContainer">
+				 <!--  <div>
+				 <div class="loader"></div>
+				 </div> -->
+				</div>
+				<div class="closebuttondiv text-center" style="padding: 0% 36%; display: none;">
+				  <a href="http://dwolla.f1projectconsulting.us/"><button type="button" class="btn btn-success btn-lg btn-block">FINISH</button></a>
+				</div>
+				</div>
+			</div>
+			</div>
+		<!-- End Content section -->
+    </section>
+    <!-- End of Body Section -->
+
+
+	
+
+
+<script src="/js/jquery.js" type="text/javascript"></script>
+<!-- Bootstrap Js Section-->
+<script src="/js/bootstrap.js" type="text/javascript"></script>
+<script  src="/js/common.js"></script>
+<script src="https://cdn.jsdelivr.net/sweetalert2/4.2.4/sweetalert2.min.js"></script>
+<script src="https://cdn.dwolla.com/1/dwolla.js"></script>
+
+
+{% if dwollatype %}
+<script type="text/javascript">
+  $.ajax({
+       url : '/iavToken?id={{req.param('token')}}',
+      type : 'GET',
+      success : function(data) {
+          loadIav(data);         
+      },
+      error : function(request,error)
+      {
+	  	swal('An error occurred!');
+          //alert("Request: "+JSON.stringify(request));
+      }
+  });
+  function loadIav(token)
+  {
+
+      var iavToken = token;
+      dwolla.configure('{{dwollatype}}');
+      dwolla.iav.start(iavToken, {
+      container: 'iavContainer',
+      stylesheets: [
+        'https://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext',
+        'https://myapp.com/iav/customStylesheet.css'
+      ],
+      microDeposits: false,
+      fallbackToMicroDeposits: true,
+      backButton: true,
+      subscriber: ({ currentPage, error }) => {
+         $(".se-pre-con").fadeOut("slow");;
+          console.log('currentPage:', currentPage, 'error:', JSON.stringify(error))
+        }
+      }, function(err, res) {
+        if(err)
+        {
+			swal('something wrong!');
+        }
+        else{
+          //alert("success");
+          //alert(res);
+          console.log(res);
+          //alert("fundingId:"+res._links["funding-source"]["href"]);
+          var myKeyVals = '{ user_id : {{req.param('token')}}, funding_id : '+res._links["funding-source"]["href"]+' }';
+          $.ajax({
+
+              url : '/dwollaIAVintegration',
+              type : 'POST',
+              data : { 'user_id' : '{{req.param('token')}}', 
+                       'funding_id' : res._links["funding-source"]["href"] },
+              success : function(data) {
+                
+                $('.closebuttondiv').show();
+                //alert(data);
+                  //loadIav(data.token); 
+				  swal(data,'Thank You!','success');
+        
+              },
+              error : function(request,error)
+              {
+                  swal('something wrong!');
+              }
+          });
+        }
+        console.log('Error: ' + JSON.stringify(err) + ' -- Response: ' + JSON.stringify(res))
+      });
+  }
+</script>
+{% endif %}
+
+{% if errormsg %}
+	<script>
+	swal('{{errormsg}}','', 'error');
+	</script>
+{% endif %}
+{% block body %}
+{% endblock %}
+
+
+<footer>
+		
+</footer> 
+
+</body>
+</html>

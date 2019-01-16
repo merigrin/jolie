@@ -1,0 +1,80 @@
+{% extends "layout/layout.nunjucks" %}
+
+{% block body %}
+<!-- Animated -->
+
+<div class="animated fadeIn">
+  <div class="page-wrap">
+    <div class="row nomargin">
+      <div class="col-lg-10 col-lg-offset-1">
+	   <h1 class="row-heading col-lg-7 marginleft15">Mass Pay History</h1>	
+    
+		<div class="pull-right">  
+		   <a href="/masscustomer" class="btn btn-default customBtn">Upload Customer</a>
+      	<a href="/masspay" class="btn btn-default customBtn">Upload Mass Pay</a>
+		</div>
+		
+      </div>
+    </div>
+  </div>
+  <div class="pageContent">
+   
+	
+      <div class="row nomargin">
+        <div class="col-lg-10 col-lg-offset-1">
+		  <div id="infomessage"></div>
+		  <table class="table table-striped  dataTable" id="massPayList_table">
+		    <thead>
+		      <tr>
+			<th scope="col" style="width: 10px">#</th>
+			<th scope="col">Date</th>
+			<th scope="col">Status</th>
+			<th scope="col">Batch Name</th>
+			<th scope="col">Action</th>
+		    </tr>
+		    </thead>
+		    <tbody>
+		    </tbody>
+		  </table>
+		  
+		  
+		  
+			
+		
+
+		  
+		  
+        </div>
+      </div>
+	  
+    
+  </div>
+</div>
+
+	<div id="myModal" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content"> <span class="close" onclick="closemodal('myModal')">&times;</span>
+		    <h4 class="modal-title">Masspay List items</h4>
+		    <div class="modal-body">
+		   	<table class="table table-striped  dataTable" id="massPayListitem_table">
+					<thead>
+					  <tr>
+					<th scope="col" style="width: 10px">Custome ID</th>
+					<th scope="col">First Name</th>
+					<th scope="col">Last Name</th>
+					<th scope="col">Amount</th>
+					<th scope="col">Status</th>
+					</tr>
+					</thead>
+					<tbody>
+					</tbody>
+		  </table>
+					</div>
+		  </div>
+		</div>
+		
+<div id="modetype" style="display:none">{{req.session.type}}</div>
+<!-- .animated -->
+
+
+{% endblock %}

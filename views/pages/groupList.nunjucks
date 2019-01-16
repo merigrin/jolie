@@ -1,0 +1,46 @@
+{% extends "layout/layout.nunjucks" %}
+
+{% block body %}
+<!-- Animated -->
+
+<div class="animated fadeIn">
+  <div class="page-wrap">
+    <div class="row nomargin">
+      <div class="col-lg-10 col-lg-offset-1">
+        <h1>Group list</h1>
+      	<a href="/createGroup" class="btn btn-default myBtn">Add new group</a>		
+      </div>
+    </div>
+  </div>
+  <div class="pageContent">
+   
+	
+      <div class="row nomargin">
+        <div class="col-lg-10 col-lg-offset-1">
+		  <div id="infomessage"></div>
+		  <table class="table table-striped  dataTable" id="groupList_table">
+		    <thead>
+		      <tr>
+			<th scope="col" style="width: 10px">#</th>			
+			<th scope="col">Group Name</th>
+			<th scope="col">Date</th>
+			<th scope="col">Action</th>
+		    </tr>
+		    </thead>
+		    <tbody>
+		    </tbody>
+		  </table>
+		  		  
+		  <!--Create group form popup-->
+		  
+		  
+        </div>
+      </div>
+    
+  </div>
+</div>
+
+<!-- .animated -->
+
+
+{% endblock %}

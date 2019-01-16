@@ -1,0 +1,212 @@
+{% extends "layout/layout.nunjucks" %}
+
+{% block body %}
+<!-- Animated -->
+
+<div class="animated fadeIn">
+  <div class="page-wrap">
+    <div class="row nomargin">
+      <div class="col-lg-10 col-lg-offset-1">
+	  <div class="row">
+        <h1 class="row-heading col-lg-8 marginleft15">Recieve Only Customers</h1>				
+		<div class="pull-right">  
+			<a href="/masscustomer" class="btn btn-default customBtn">Upload Customer</a>
+		   <button id="myBtn" class="btn btn-default customBtn" onclick="openmodel('myModal')">Add Customer</button>
+		</div>
+	  </div>
+		
+		
+		<!--<div class="row buttons-row">
+			<div class="col-xs-6 text-left">
+				<div class="previous">
+				 <a href="/masscustomer" class="btn btn-default customBtn">Upload Customer</a>
+				</div>
+			</div>
+			<div class="col-xs-6 text-right">   
+				<div class="next">
+				  <button id="myBtn" class="btn btn-default customBtn" onclick="openmodel('myModal')">Add Customer</button>
+				</div>
+			</div>
+		</div>-->
+
+
+			<div class="panel panel-primary">
+				<div class="panel-heading clickable">
+					<h3 class="panel-title">Information</h3>
+					<span class="pull-right "><i class="glyphicon glyphicon-chevron-up"></i></span>
+				</div>
+				<div class="panel-body"><p class="sub-header"> <b>Add Customer</b> - Create the new Customer </p>
+		<p class="sub-header"> <b>Add Funding Source</b> - Add Bank details using Manual or IAV </p>
+		<p class="sub-header"> <b>Micro Deposits</b> - Check your micro Deposits status </p>
+		<p class="sub-header"> <b>Send Money</b> - Transfer amount to customer Bank account</p>
+		<p class="sub-header"> <b>Activate</b> - Activate the customer</p>
+		<p class="sub-header"> <b>Activate</b> - De Activate the customer</p></div>
+			</div>
+		
+		
+        <!--<p class="sub-header">The Sandbox environment is a complete replica of the Dwolla production environment, supporting all of the same API endpoints. All data and money within the Sandbox is test data and completely separate from your production account. Happy testing!</p>-->
+	
+      </div>
+    </div>
+  </div>  
+  
+ 
+  
+  
+ 
+  <div class="pageContent">
+  
+ 
+  
+  
+<!--  <div class="row nomargin">
+    <div class="col-lg-10"></div>
+    <div class="col-lg-2" style="margin-bottom:15px;">
+        <a href="/masscustomer" class="btn btn-default customBtn">Upload Customer</a>
+    </div>
+</div>-->
+   
+	
+      <div class="row nomargin">
+        <div class="col-lg-12 col-lg-offset-0">
+		  <div id="infomessage"></div>
+		  <table class="table table-striped  dataTable" id="customeruser_table">
+		    <thead>
+		      <tr>
+			<th scope="col" style="width: 10px">#</th>
+			<th scope="col">First Name</th>
+			<th scope="col">Last Name</th>
+			<th scope="col">Email</th>
+			<th scope="col">Business Name</th>
+			<th scope="col">Action</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    </tbody>
+		  </table>
+		  
+		  
+		  
+			
+		<div id="myModal" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content"> <span class="close" onclick="closemodal('myModal')">&times;</span>
+		    <h4 class="modal-title">Create Receive-Only Customer</h4>
+		    <div class="modal-body">
+		      <form action="addcustomers" method="post" class="logForm form-animate-fields" id="customerform">
+			<div class="errorlabel" id="popuperror">{{errormsg}}</div>
+			<div class="row nomargin">
+			
+			  <div class="form-group form-field">
+			    <input type="text" class="form-control" name="firstName"  value="{{req.param('firstName')}}" id="firstName" />
+			    <label for="firstName" class="form-label"> <span class="form-label-content">First Name</span> </label>
+			  </div>
+			  <div class="form-group form-field">
+			    <input type="text" class="form-control" name="lastName" value="{{req.param('lastName')}}" id="LastName" />
+			    <label for="LastName" class="form-label"> <span class="form-label-content">Last Name</span> </label>
+			  </div>
+			</div>
+			<div class="form-group form-field">
+			  <input type="text" class="form-control" name="businessName" id="businessName" value="{{req.param('businessName')}}" />
+			  <label for="businessName" class="form-label"> <span class="form-label-content">Business Name</span> </label>
+			</div>
+			<div class="form-group form-field">
+			  <input type="text" class="form-control" name="email" id="emailAddress" value="{{req.param('email')}}" />
+			  <label for="emailAddress" class="form-label"> <span class="form-label-content">Email Address</span> </label>
+			</div>
+			<div class="checkbox">
+			  <input type="checkbox" id="agreeStatement" />
+			  <label for="agreeStatement"><span>By checking this box, you confirm you have received written authorization from this user to collect, use, and share the user's personal identifying information with Dwolla, Inc. You must be able to provide a copy of this authorization to Dwolla, Inc. at any time upon request.</span></label>
+			</div>
+				<input type="button" class="btn btn-default actionBtn" value="Create" onclick="frmsubmit()">
+		      </form>
+		    </div>
+		  </div>
+		</div>
+		
+		
+		
+		<div id="iavModal" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content"> <span class="close" onclick="closemodal('iavModal')">&times;</span>
+		    <h4 class="modal-title">Create Funding Source </h4>
+		    <div class="modal-body">
+		     	
+				<div id="iavContainer"></div>
+		    </div>
+		  </div>
+		</div>
+		
+		
+		
+		<div id="sendmoney" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content"> <span class="close" onclick="closemodal('sendmoney')">&times;</span>
+		    <h4 class="modal-title">Send Money to Customer </h4>
+		    <div class="modal-body">
+		     <form action="sendmoney" method="post" class="logForm form-animate-fields" id="sendform">
+			<div class="errorlabel" id="popuperror">{{errormsg}}</div>
+			<div class="row nomargin">
+			  <div class="form-group form-field">
+			    <input type="text" class="form-control isnumber" name="amount"  value="" id="amount"  required/>
+			    <label for="amount" class="form-label"> <span class="form-label-content">Amount</span> </label>
+			  </div>
+			 </div>
+			<div class="row nomargin">
+			  
+			  <div class="form-group form-field">
+			    <input type="hidden" class="form-control" name="customer_id" value="" id="customer_id" />
+			  </div>
+			</div>
+				<input type="button" class="btn btn-default actionBtn" value="Send" onclick="frmsendsubmit()">
+		      </form>
+		    </div>
+		  </div>
+		</div>
+		
+		<div id="manual" class="modal">
+		  <!-- Modal content -->
+		  <div class="modal-content"> <span class="close" onclick="closemodal('manual')">&times;</span>
+		    <h4 class="modal-title">Account Details</h4>
+		    <div class="modal-body">
+		     <form action="/manualfund" method="post" class="manualForm form-animate-fields" id="manualForm">
+			  <div class="errorlabel" id="popuperror">{{errormsg}}</div>
+			  <input type="hidden" class="form-control" name="customer_id" value="" id="mcustomer_id" />
+			  <div class="form-group form-field">
+				<input type="text" class="form-control" name="accountNumber" id="accountNumber" value="{{req.param('accountNumber')}}" />
+				<label for="accountNumber" class="form-label"> <span class="form-label-content">Account number</span> </label>
+			  </div>
+			  <div class="form-group form-field">
+				<input type="text" class="form-control" name="routingNumber" id="routingNumber" value="{{req.param('routingNumber')}}" />
+				<label for="routingNumber" class="form-label"> <span class="form-label-content">Routing number</span> </label>
+			  </div>			  
+			  <div class="form-group form-field">
+				<input type="text" class="form-control" name="bankName" id="bankName" value="{{req.param('bankName')}}" />
+				<label for="bankName" class="form-label"> <span class="form-label-content">Name</span> </label>
+			  </div>
+			  <div class="form-group form-field">
+				<label for="accountType">Select Account type:</label>
+				<select class="form-control form-field" id="accountType" name="accountType" style="border-bottom:1px solid #c9d3e0;">
+				  <option value="savings">Savings</option>
+				  <option value="checking">Checking</option>
+				</select>
+			  </div>
+			  <input type="button" class="btn btn-default actionBtn" value="Create Funding Source" onClick="frmfundsubmit()">
+			</form>
+		    </div>
+		  </div>
+		</div>
+
+		  
+		  
+        </div>
+      </div>
+	  
+    
+  </div>
+</div>
+<div id="modetype" style="display:none">{{req.session.type}}</div>
+<!-- .animated -->
+
+
+{% endblock %}
