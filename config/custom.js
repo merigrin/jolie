@@ -70,20 +70,6 @@ module.exports.custom = {
   // signs up, or when an existing user attempts to change their email address.
   verifyEmailAddresses: false,
 
-  /**************************************************************************
-  *                                                                         *
-  * Billing & payments configuration                                        *
-  *                                                                         *
-  * (https://dashboard.stripe.com/account/apikeys)                          *
-  *                                                                         *
-  **************************************************************************/
-  // stripePublishableKey: 'pk_test_Zzd814nldl91104qor5911gjald',
-  // stripeSecret: 'sk_test_Zzd814nldl91104qor5911gjald',
-  //--------------------------------------------------------------------------
-  // /\  Configure these to enable support for billing features.
-  // ||  (Or if you don't need billing, feel free to remove them.)
-  //--------------------------------------------------------------------------
-
   /***************************************************************************
   *                                                                          *
   * Any other custom config this Sails app should use during development.    *
