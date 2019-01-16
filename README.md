@@ -27,7 +27,3 @@ internalEmailAddress: 'support@example.com',
 5) Update nodemailer.js with your SENDGRID application credentials
 
 Then again open, "nodemailer.js" and enter the SENDGRID_USER, SENDGRID_PASSWORD, SENDGRID_EMAIL, email_id & <hostname> for all environment.
-
-## License
-
-Jolie is licensed under <a href="https://opensource.org/licenses/MIT">MIT License</a>.
