@@ -1,6 +1,6 @@
 ## Jolie
 
-Jolie is a open source application built with node.js for testing the Dwolla <a href="http://dwolla.com">ACH API</a>.
+Jolie is a open source application built for testing the Dwolla <a href="http://dwolla.com">ACH API</a>.
 
 ## To Deploy Application on Heroku you need
 
