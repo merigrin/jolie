@@ -42,9 +42,9 @@
 								<p class="col-xs-12 col-sm-12 col-md-9 col-lg-9 nopadding">Helpful links:</p>
 								<div class="clearfix"></div>
 								<ul>
-									<li><a href="">Dwolla Sandbox Credentials</a></li>
-									<li><a href="">Dwolla Production Credentials</a></li>
-									<li><a href="">Repo ReadMe</a></li>
+									<li><a href="https://dashboard-sandbox.dwolla.com/applications">Dwolla Sandbox Credentials</a></li>
+									<li><a href="https://dashboard.dwolla.com/applications">Dwolla Production Credentials</a></li>
+									<li><a href="https://github.com/merigrin/jolie/">Github</a></li>
 								</ul>
 							</div>
 						</div>
