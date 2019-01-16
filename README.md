@@ -2,13 +2,11 @@
 
 Jolie is a open source application built for testing the Dwolla <a href="http://dwolla.com">ACH API</a>.
 
-## To Deploy Application on Heroku you need
+## Follow these steps to deploy this application on Heroku
 
 1) Create a application in heroku. 
 
-
 2) Create the addon postgres in heroku using Resource tab
-
 
 3) Set the NODE_ENV to development for the app in the heroku site before you install.
 
