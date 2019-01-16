@@ -1,6 +1,6 @@
 ## Jolie
 
-Jolie is a open source application build with node.js for testing the Dwolla ACH API.
+Jolie is a open source application build with node.js for testing the Dwolla <a href="http://dwolla.com">ACH API</a>.
 
 ## To Deploy Application on Heroku you need
 
@@ -32,4 +32,4 @@ Then again open, "nodemailer.js" and enter the SENDGRID_USER, SENDGRID_PASSWORD,
 
 ## License
 
-Jolie is licensed under MIT License. # jolie
+Jolie is licensed under MIT License.
