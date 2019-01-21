@@ -15,7 +15,7 @@
     "csvjson": "^5.1.0",
     "datatables": "^1.10.18",
     "dwolla-v2": "^2.0.0",
-    "grunt": "1.0.1",
+    "grunt": "^1.0.3",
     "json2csv": "^4.3.2",
     "moment": "^2.22.2",
     "nodemailer": "^4.7.0",
@@ -27,7 +27,7 @@
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^1.5.5",
     "sails-postgresql": "^1.0.1",
-	"sendmail": "^1.4.1"
+    "sendmail": "^1.4.1"
   },
   "devDependencies": {
     "@sailshq/eslint": "^4.19.3"
